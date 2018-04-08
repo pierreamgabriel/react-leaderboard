@@ -1,0 +1,50 @@
+.top {
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  background-color: red;
+  height: 40px;
+}
+.container-fluid {
+  max-width: 1000px;
+}
+.underlined {
+  text-decoration: underline;
+}
+.board{
+  border-bottom: 1px solid #cccccc;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+.first0 {
+  width: 10%;
+  padding-top: 10px;
+}
+.first{
+  width: 10%;
+  padding-top: 10px;
+}
+.second {
+  width: 35%;
+  padding-top: 10px;
+}
+.third {
+   width: 35%;
+  text-align: center;
+  padding-top: 10px;
+}
+.fourth {
+   width: 20%;
+  text-align: center;
+  padding-top: 10px;
+}
+.img{
+  margin-bottom: 2px;
+  max-width: 50px;
+  display:inline;
+}
+.username{
+  display:inline;
+  margin-left: 5px;
+  font-weight: bold;
+}

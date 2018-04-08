@@ -1,0 +1,131 @@
+/* This is a React app that retrives data from an API using AJAX and shows a list of users based on points received in the past 30 days and all time points.
+
+Language: Javascript
+Libraries: React, jQuery
+Framework: Bootstrap
+
+Developed by: Pierre Macedo
+*/
+
+
+class Header extends React.Component {
+  render() {
+    return (
+      <div style={{backgroundColor: 'red', color: 'white', fontSize: '40px', textAlign: 'center', marginBottom: '30px'}}>Camper Leaderboard</div>
+     
+    );
+  }
+};
+class Footer extends React.Component {
+  render() {
+    return (
+      <div style={{backgroundColor: 'red', color: 'white', fontSize: '20px', textAlign: 'center', marginTop: '30px'}}>by Pierre Macedo</div>
+     
+    );
+  }
+};
+class Top extends React.Component {
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3 position first0 top">#</div>
+          <div className="col-sm-3 second top">Camper Name</div>
+          <div className="col-sm-3 third top"><p id="recent" className="underlined" onClick={this.props.recent}>Points in past 30 days&#9662;</p></div>
+          <div className="col-sm-3 fourth top"><p id="alltime" onClick={this.props.alltime}>All time points</p></div>
+        </div>
+        </div>
+     
+    );
+  }
+};
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.showData = this.showData.bind(this);
+    this.sendData = this.sendData.bind(this);
+    this.recent = this.recent.bind(this);
+    this.alltime = this.alltime.bind(this);
+  }
+    componentDidMount (){
+      $.ajax({
+    url:"https://fcctop100.herokuapp.com/api/fccusers/top/recent",
+    dataType:"json",
+    cache:false,
+    success: function (json) {
+      
+      this.sendData(json);
+        }.bind(this) 
+}); 
+     
+    }
+  recent () {
+    users = users.sort(function(a, b){
+    return b.recent-a.recent
+      });
+    changeText();
+    function changeText(){
+      document.getElementById("recent").classList.add("underlined");     document.getElementById("alltime").classList.remove("underlined"); 
+document.getElementById("recent").innerHTML="Points in past 30 days&#9662;"; 
+document.getElementById("alltime").innerHTML="All time points";  
+    }
+    
+    this.showData(users);
+  }
+  alltime () {
+    users = users.sort(function(a, b){
+    return b.alltime-a.alltime
+      });
+    changeText();
+    function changeText(){
+      document.getElementById("recent").classList.remove("underlined");         document.getElementById("alltime").classList.add("underlined"); document.getElementById("recent").innerHTML="Points in past 30 days"; 
+document.getElementById("alltime").innerHTML="All time points&#9662;";}
+    this.showData(users);
+  }
+  sendData(objects) {
+    window.users = objects;
+    this.showData(users);
+  }
+  showData (objects) {
+    let tempUsers = objects;
+    getData();
+    function getData () {
+      document.getElementById('board').innerHTML="";
+   let numbers = 1;
+      for (let i=0;i<100;i++){
+        let append = '<div class="container-fluid board"><div class="row"><div class="col-sm-3 first">' + numbers + '</div><div class="col-sm-3 second"><img class="img-responsive img" src="' + tempUsers[i]['img'] + '"/><p class="username">' + tempUsers[i]['username'] + '</p></div>' + '<div class="col-sm-3 third">' + tempUsers[i]['recent'] + '</div>' + '<div class="col-sm-3 fourth">' + tempUsers[i]['alltime'] + '</div></div></div>'
+         
+        $('#board').append(append);
+        numbers = numbers + 1;
+      
+  }
+    }
+  }
+  render() {  
+    return (
+     <div>
+        <Top recent={this.recent} alltime={this.alltime} />
+        <div id="board"></div>
+        </div>
+     
+    );
+  }
+};
+
+class FullApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+          <Board />
+        <Footer />
+        </div>
+     
+    );
+  }
+};
+ReactDOM.render(
+  <FullApp />,
+  document.getElementById('main')
+);
