@@ -6,15 +6,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/* This is a React app that retrives data from an API using AJAX and shows a list of users based on points received in the past 30 days and all time points.
-
-Language: Javascript
-Libraries: React, jQuery
-Framework: Bootstrap
-
-Developed by: Pierre Macedo
-*/
-
 var Header = function (_React$Component) {
   _inherits(Header, _React$Component);
 
